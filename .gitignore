@@ -1,0 +1,49 @@
+# Java build output
+target/
+*.jar
+*.war
+*.ear
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+nbproject/
+.classpath
+.project
+.settings/
+
+# Log files
+*.log
+logs/
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json # Usually committed, but for this task, can be ignored if causing issues with tool
+# If package-lock.json is needed, remove it from here.
+
+# H2 database files (if stored in project dir, like in ./target/)
+*.mv.db
+*.trace.db
+
+# Frontend build output (if different from src/main/webapp/css/style.css)
+# dist/
+# build/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
