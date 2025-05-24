@@ -1,6 +1,7 @@
 package com.example.servlet;
 
 import com.example.model.User;
+import com.example.dao.UserDao; // Import UserDao
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException; // Import SQLException
+import java.util.Optional; // Import Optional
 
 // --- CLOUD INTEGRATION NOTES ---
 // To support a REST API (e.g., POST /api/users/login) alongside web forms:
@@ -30,47 +33,65 @@ import java.io.IOException;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private UserDao userDao;
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        userDao = new UserDao(); // Initialize UserDao
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        HttpSession httpSession = request.getSession(); // Get session to store messages
 
         // Basic input validation
         if (username == null || username.trim().isEmpty() ||
             password == null || password.isEmpty()) {
-            request.setAttribute("errorMessage", "Username and password are required.");
-            request.getRequestDispatcher("/login.html").forward(request, response);
+            // Using session for error message as login.html is static
+            httpSession.setAttribute("errorMessage", "Username and password are required.");
+            response.sendRedirect("login.html?error=validation"); // Redirect with an error indicator
             return;
         }
 
-        User user = RegistrationServlet.getUserByUsername(username);
+        try {
+            Optional<User> userOpt = userDao.getUserByUsername(username);
 
-        if (user != null) {
-            // Password verification (placeholder - must align with registration hashing)
-            // In a real application, use a secure password hashing comparison here.
-            // For example, if bcrypt was used for registration: BCrypt.checkpw(password, user.getPasswordHash())
-            String expectedPasswordHash = "hashed_" + password + "_simple"; // Placeholder
-            if (expectedPasswordHash.equals(user.getPasswordHash())) {
-                // Valid credentials, create session
-                HttpSession session = request.getSession(true);
-                session.setAttribute("loggedInUser", username); // Store username in session
-                session.setAttribute("user", user); // Optionally store the whole user object
+            if (userOpt.isPresent()) {
+                User user = userOpt.get();
+                // Password verification (placeholder - must align with registration hashing)
+                // In a real application, use a secure password hashing comparison here.
+                // For example, if bcrypt was used for registration: BCrypt.checkpw(password, user.getPasswordHash())
+                String expectedPasswordHash = "hashed_" + password + "_simple"; // Placeholder
+                if (expectedPasswordHash.equals(user.getPasswordHash())) {
+                    // Valid credentials, create session
+                    httpSession.setAttribute("loggedInUser", username); // Store username in session
+                    httpSession.setAttribute("user", user); // Optionally store the whole user object
+                    
+                    // Clear any previous error/success messages from registration/login attempts
+                    httpSession.removeAttribute("errorMessage");
+                    httpSession.removeAttribute("successMessage");
 
-                System.out.println("User logged in: " + username); // Log for debugging
-
-                // Redirect to dashboard page
-                response.sendRedirect("dashboard.html"); // Assuming dashboard.html will be created
+                    System.out.println("User logged in via DB: " + username); // Log for debugging
+                    response.sendRedirect("dashboard.jsp");
+                } else {
+                    // Invalid password
+                    httpSession.setAttribute("errorMessage", "Invalid username or password.");
+                    response.sendRedirect("login.html?error=credentials");
+                }
             } else {
-                // Invalid password
-                request.setAttribute("errorMessage", "Invalid username or password.");
-                request.getRequestDispatcher("/login.html").forward(request, response);
+                // User not found
+                httpSession.setAttribute("errorMessage", "Invalid username or password.");
+                response.sendRedirect("login.html?error=credentials");
             }
-        } else {
-            // User not found
-            request.setAttribute("errorMessage", "Invalid username or password.");
-            request.getRequestDispatcher("/login.html").forward(request, response);
+        } catch (SQLException e) {
+            System.err.println("Database error during login: " + e.getMessage());
+            e.printStackTrace();
+            httpSession.setAttribute("errorMessage", "An error occurred during login. Please try again later.");
+            response.sendRedirect("login.html?error=db");
         }
     }
 
@@ -78,7 +99,18 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Forward GET requests to the login page
-        // This allows users to navigate to /login directly
+        // Check for success/error messages from registration to display on login page
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            if (session.getAttribute("successMessage") != null) {
+                request.setAttribute("successMessage", session.getAttribute("successMessage"));
+                session.removeAttribute("successMessage");
+            }
+            if (session.getAttribute("errorMessage") != null) {
+                request.setAttribute("errorMessage", session.getAttribute("errorMessage"));
+                session.removeAttribute("errorMessage");
+            }
+        }
         request.getRequestDispatcher("/login.html").forward(request, response);
     }
 }
