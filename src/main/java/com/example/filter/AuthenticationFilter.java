@@ -9,8 +9,8 @@ import java.io.IOException;
 
 // Using @WebFilter annotation for filter mapping.
 // web.xml update will also be done for completeness and older containers.
-// This filter protects /dashboard.html and any paths under /api/ (if we add them later)
-@WebFilter(urlPatterns = {"/dashboard.html", "/api/*"})
+// This filter protects /dashboard.jsp and any paths under /api/ (if we add them later)
+@WebFilter(urlPatterns = {"/dashboard.jsp", "/api/*"})
 public class AuthenticationFilter implements Filter {
 
     @Override
@@ -32,14 +32,15 @@ public class AuthenticationFilter implements Filter {
         // Allow access to login, registration pages, and static resources like CSS/JS
         // without authentication.
         // This part is essential to avoid redirect loops or blocking essential resources.
-        if (isLoggedIn || requestURI.endsWith("/login.html") || requestURI.endsWith("/login") ||
-            requestURI.endsWith("/register.html") || requestURI.endsWith("/register") ||
-            requestURI.endsWith(".css") || requestURI.endsWith(".js") ||
-            requestURI.equals(httpRequest.getContextPath() + "/")) { // Allow access to context root (welcome page)
+        String contextPath = httpRequest.getContextPath();
+        if (isLoggedIn || requestURI.endsWith("/login.html") || requestURI.equals(contextPath + "/login") ||
+            requestURI.endsWith("/register.html") || requestURI.equals(contextPath + "/register") ||
+            requestURI.startsWith(contextPath + "/css/") || requestURI.startsWith(contextPath + "/js/") || // Allow all /css/* and /js/*
+            requestURI.equals(contextPath + "/") || requestURI.endsWith("index.html")) { // Allow access to context root (welcome page)
             chain.doFilter(request, response); // User is logged in or accessing a public page, continue request
         } else {
             System.out.println("User not logged in. Redirecting to login page from URI: " + requestURI);
-            httpResponse.sendRedirect(httpRequest.getContextPath() + "/login.html"); // User not logged in, redirect to login
+            httpResponse.sendRedirect(contextPath + "/login.html"); // User not logged in, redirect to login
         }
     }
 

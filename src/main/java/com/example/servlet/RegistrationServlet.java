@@ -1,6 +1,7 @@
 package com.example.servlet;
 
 import com.example.model.User;
+import com.example.dao.UserDao; // Import UserDao
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import java.sql.SQLException; // Import SQLException
+import java.util.Optional; // Import Optional for better handling of user presence
 
 // Using @WebServlet annotation for servlet mapping,
 // web.xml update will also be done for completeness and older containers.
@@ -32,9 +31,13 @@ import java.util.concurrent.ConcurrentHashMap;
 @WebServlet("/register")
 public class RegistrationServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
+    private UserDao userDao;
 
-    // In-memory user storage (placeholder - replace with a database in production)
-    private static final Map<String, User> userStore = new ConcurrentHashMap<>();
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        userDao = new UserDao(); // Initialize UserDao
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -52,22 +55,37 @@ public class RegistrationServlet extends HttpServlet {
             return;
         }
 
-        // Check if username already exists
-        if (userStore.containsKey(username)) {
-            request.setAttribute("errorMessage", "Username already exists. Please choose another one.");
-            // Forward back to registration page with an error message
-            request.getRequestDispatcher("/register.html").forward(request, response);
-        } else {
+        try {
+            // Check if username or email already exists
+            if (userDao.isUsernameTaken(username)) {
+                request.setAttribute("errorMessage", "Username already exists. Please choose another one.");
+                request.getRequestDispatcher("/register.html").forward(request, response);
+                return;
+            }
+            if (userDao.isEmailTaken(email)) {
+                request.setAttribute("errorMessage", "Email already registered. Please use another email or login.");
+                request.getRequestDispatcher("/register.html").forward(request, response);
+                return;
+            }
+
             // Password hashing (placeholder - use bcrypt or Argon2 in production)
             String passwordHash = "hashed_" + password + "_simple"; // DO NOT use this in production
 
-            User newUser = new User(username, passwordHash, email);
-            userStore.put(username, newUser);
+            User newUser = new User(username, passwordHash, email); // ID is generated in User constructor
+            userDao.addUser(newUser);
 
-            System.out.println("User registered: " + newUser); // Log for debugging
+            System.out.println("User registered via DB: " + newUser); // Log for debugging
 
             // Redirect to login page upon successful registration
+            // Optionally, you could set a success message for the login page
+            request.getSession().setAttribute("successMessage", "Registration successful! Please login.");
             response.sendRedirect("login.html");
+
+        } catch (SQLException e) {
+            System.err.println("Database error during registration: " + e.getMessage());
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "An error occurred during registration. Please try again later.");
+            request.getRequestDispatcher("/register.html").forward(request, response);
         }
     }
 
@@ -75,12 +93,14 @@ public class RegistrationServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         // Forward GET requests to the registration page
-        // This allows users to navigate to /register directly
         request.getRequestDispatcher("/register.html").forward(request, response);
     }
 
-    // Method to get a user, potentially for login servlet (not part of this subtask)
-    public static User getUserByUsername(String username) {
-        return userStore.get(username);
-    }
+    // This static method is no longer suitable as it relied on the in-memory store.
+    // The LoginServlet will need to use UserDao directly.
+    // public static User getUserByUsername(String username) {
+    //     // return userStore.get(username); // Old implementation
+    //     // This should be replaced by a call to UserDao in the LoginServlet
+    //     return null;
+    // }
 }

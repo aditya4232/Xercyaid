@@ -6,6 +6,11 @@
 
     <display-name>My Webapp</display-name>
 
+    <!-- Application Context Listener for DB Initialization -->
+    <listener>
+        <listener-class>com.example.listener.AppContextListener</listener-class>
+    </listener>
+
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
     </welcome-file-list>
@@ -47,11 +52,103 @@
     </filter>
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
-        <url-pattern>/dashboard.html</url-pattern>
+        <url-pattern>/dashboard.jsp</url-pattern>
     </filter-mapping>
     <filter-mapping>
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/api/*</url-pattern> <!-- Protecting future API endpoints -->
     </filter-mapping>
+
+    <!-- DSA Servlet Configuration -->
+    <servlet>
+        <servlet-name>DsaServlet</servlet-name>
+        <servlet-class>com.example.servlet.DsaServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DsaServlet</servlet-name>
+        <url-pattern>/dsa/problem</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DsaServlet</servlet-name>
+        <url-pattern>/dsa/today</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DsaServlet</servlet-name>
+        <url-pattern>/dsa/submitSolution</url-pattern>
+    </servlet-mapping>
+
+    <!-- Educational Post Servlet Configuration -->
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>com.example.servlet.PostServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/posts</url-pattern> <!-- Handles single post with ?id= and also defaults to list -->
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/posts/list</url-pattern> <!-- Explicitly for listing all posts -->
+    </servlet-mapping>
+
+    <!-- Poll Servlet Configuration -->
+    <servlet>
+        <servlet-name>PollServlet</servlet-name>
+        <servlet-class>com.example.servlet.PollServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PollServlet</servlet-name>
+        <url-pattern>/polls</url-pattern> <!-- Handles all poll actions via parameters -->
+    </servlet-mapping>
+
+    <!-- Event Servlet Configuration -->
+    <servlet>
+        <servlet-name>EventServlet</servlet-name>
+        <servlet-class>com.example.servlet.EventServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>EventServlet</servlet-name>
+        <url-pattern>/events</url-pattern> <!-- Handles all event actions via parameters -->
+    </servlet-mapping>
+
+    <!-- Firebase Token Filter Configuration -->
+    <filter>
+        <filter-name>FirebaseTokenFilter</filter-name>
+        <filter-class>com.example.filter.FirebaseTokenFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FirebaseTokenFilter</filter-name>
+        <url-pattern>/api/*</url-pattern> <!-- Protect all /api/* endpoints -->
+    </filter-mapping>
+
+    <!-- User Profile Servlet (for Firebase authenticated users) -->
+    <servlet>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <servlet-class>com.example.servlet.UserProfileServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UserProfileServlet</servlet-name>
+        <url-pattern>/api/user/profile</url-pattern>
+    </servlet-mapping>
+
+    <!-- Post API Servlet Configuration -->
+    <servlet>
+        <servlet-name>PostApiServlet</servlet-name>
+        <servlet-class>com.example.servlet.PostApiServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>PostApiServlet</servlet-name>
+        <url-pattern>/api/posts</url-pattern>
+    </servlet-mapping>
+
+    <!-- Story API Servlet Configuration -->
+    <servlet>
+        <servlet-name>StoryApiServlet</servlet-name>
+        <servlet-class>com.example.servlet.StoryApiServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>StoryApiServlet</servlet-name>
+        <url-pattern>/api/stories</url-pattern>
+    </servlet-mapping>
 
 </web-app>

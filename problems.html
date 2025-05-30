@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problems - Codegram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8b5cf6',
+                        secondary: '#7c3aed',
+                        accent: '#f59e0b',
+                        instagram: '#E4405F',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <div class="flex items-center space-x-4">
+                    <i class="fab fa-instagram text-3xl text-primary"></i>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-instagram bg-clip-text text-transparent">Codegram</h1>
+                </div>
+                
+                <div class="flex items-center space-x-6">
+                    <a href="feed.html" class="flex items-center text-gray-600 hover:text-primary">
+                        <i class="fas fa-home text-xl mr-2"></i>
+                        <span class="hidden md:block">Feed</span>
+                    </a>
+                    <a href="problems.html" class="flex items-center text-primary">
+                        <i class="fas fa-code text-xl mr-2"></i>
+                        <span class="hidden md:block">Problems</span>
+                    </a>
+                    <a href="#" class="flex items-center text-gray-600 hover:text-primary">
+                        <i class="fas fa-trophy text-xl mr-2"></i>
+                        <span class="hidden md:block">Contest</span>
+                    </a>
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
+                        <span id="user-avatar">U</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto px-4 py-6">
+        <!-- Header -->
+        <div class="bg-white rounded-xl border border-gray-200 p-6 mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <h1 class="text-3xl font-bold text-gray-800">Problems</h1>
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center bg-gray-100 rounded-lg px-4 py-2">
+                        <i class="fas fa-search text-gray-400 mr-2"></i>
+                        <input type="text" placeholder="Search problems..." class="bg-transparent outline-none w-64">
+                    </div>
+                    <select class="border border-gray-300 rounded-lg px-4 py-2 outline-none focus:ring-2 focus:ring-primary">
+                        <option>All Difficulties</option>
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                    </select>
+                </div>
+            </div>
+            
+            <!-- Stats -->
+            <div class="grid grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-green-600">23</div>
+                    <div class="text-sm text-gray-600">Easy Solved</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-yellow-600">12</div>
+                    <div class="text-sm text-gray-600">Medium Solved</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-red-600">3</div>
+                    <div class="text-sm text-gray-600">Hard Solved</div>
+                </div>
+                <div class="text-center">
+                    <div class="text-2xl font-bold text-primary">38</div>
+                    <div class="text-sm text-gray-600">Total Solved</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Problems List -->
+        <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead class="bg-gray-50 border-b border-gray-200">
+                        <tr>
+                            <th class="text-left py-4 px-6 font-semibold text-gray-700">Status</th>
+                            <th class="text-left py-4 px-6 font-semibold text-gray-700">Title</th>
+                            <th class="text-left py-4 px-6 font-semibold text-gray-700">Difficulty</th>
+                            <th class="text-left py-4 px-6 font-semibold text-gray-700">Acceptance</th>
+                            <th class="text-left py-4 px-6 font-semibold text-gray-700">Frequency</th>
+                            <th class="text-left py-4 px-6 font-semibold text-gray-700">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200">
+                        <tr class="hover:bg-gray-50 transition duration-200">
+                            <td class="py-4 px-6">
+                                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>
+                                    <div class="font-semibold text-gray-800 hover:text-primary cursor-pointer">1. Two Sum</div>
+                                    <div class="text-sm text-gray-600">Array, Hash Table</div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Easy</span>
+                            </td>
+                            <td class="py-4 px-6 text-gray-600">49.1%</td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="text-primary hover:text-secondary font-medium">View Solutions</button>
+                            </td>
+                        </tr>
+                        
+                        <tr class="hover:bg-gray-50 transition duration-200">
+                            <td class="py-4 px-6">
+                                <i class="far fa-circle text-gray-400 text-xl"></i>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>
+                                    <div class="font-semibold text-gray-800 hover:text-primary cursor-pointer">2. Add Two Numbers</div>
+                                    <div class="text-sm text-gray-600">Linked List, Math, Recursion</div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Medium</span>
+                            </td>
+                            <td class="py-4 px-6 text-gray-600">37.8%</td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition duration-300">Solve</button>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 transition duration-200">
+                            <td class="py-4 px-6">
+                                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>
+                                    <div class="font-semibold text-gray-800 hover:text-primary cursor-pointer">3. Longest Substring Without Repeating Characters</div>
+                                    <div class="text-sm text-gray-600">Hash Table, String, Sliding Window</div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Medium</span>
+                            </td>
+                            <td class="py-4 px-6 text-gray-600">33.8%</td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="text-primary hover:text-secondary font-medium">View Solutions</button>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 transition duration-200">
+                            <td class="py-4 px-6">
+                                <i class="far fa-circle text-gray-400 text-xl"></i>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>
+                                    <div class="font-semibold text-gray-800 hover:text-primary cursor-pointer">4. Median of Two Sorted Arrays</div>
+                                    <div class="text-sm text-gray-600">Array, Binary Search, Divide and Conquer</div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium">Hard</span>
+                            </td>
+                            <td class="py-4 px-6 text-gray-600">35.2%</td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-yellow-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition duration-300">Solve</button>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 transition duration-200">
+                            <td class="py-4 px-6">
+                                <i class="far fa-circle text-gray-400 text-xl"></i>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>
+                                    <div class="font-semibold text-gray-800 hover:text-primary cursor-pointer">5. Longest Palindromic Substring</div>
+                                    <div class="text-sm text-gray-600">String, Dynamic Programming</div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium">Medium</span>
+                            </td>
+                            <td class="py-4 px-6 text-gray-600">32.1%</td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-gray-300 rounded-full"></div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-secondary transition duration-300">Solve</button>
+                            </td>
+                        </tr>
+
+                        <tr class="hover:bg-gray-50 transition duration-200">
+                            <td class="py-4 px-6">
+                                <i class="fas fa-check-circle text-green-500 text-xl"></i>
+                            </td>
+                            <td class="py-4 px-6">
+                                <div>
+                                    <div class="font-semibold text-gray-800 hover:text-primary cursor-pointer">20. Valid Parentheses</div>
+                                    <div class="text-sm text-gray-600">String, Stack</div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium">Easy</span>
+                            </td>
+                            <td class="py-4 px-6 text-gray-600">40.7%</td>
+                            <td class="py-4 px-6">
+                                <div class="flex">
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full mr-1"></div>
+                                    <div class="w-2 h-2 bg-red-500 rounded-full"></div>
+                                </div>
+                            </td>
+                            <td class="py-4 px-6">
+                                <button class="text-primary hover:text-secondary font-medium">View Solutions</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="flex justify-center mt-8">
+            <div class="flex items-center space-x-2">
+                <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Previous</button>
+                <button class="px-3 py-2 bg-primary text-white rounded-lg">1</button>
+                <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">2</button>
+                <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">3</button>
+                <span class="px-3 py-2">...</span>
+                <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">50</button>
+                <button class="px-3 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const username = localStorage.getItem('username');
+            
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            if (username) {
+                document.getElementById('user-avatar').textContent = username.charAt(0).toUpperCase();
+            }
+        });
+    </script>
+</body>
+</html>

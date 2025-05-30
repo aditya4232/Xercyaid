@@ -1,0 +1,178 @@
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa; /* Light gray background */
+    color: #343a40; /* Darker text color for better readability */
+    line-height: 1.6;
+}
+
+/* Main Container for Content */
+.container {
+    width: 85%;
+    max-width: 1200px; /* Max width for larger screens */
+    margin: 20px auto; /* Centered with some top/bottom margin */
+    padding: 25px;
+    background-color: #ffffff; /* White background for content */
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.075); /* Softer shadow */
+}
+
+/* Headings */
+h1 {
+    color: #007bff; /* Primary blue for main headings */
+    margin-bottom: 0.75em;
+}
+h2 {
+    color: #17a2b8; /* Info blue for secondary headings */
+    margin-bottom: 0.5em;
+}
+h3 {
+    color: #28a745; /* Success green for tertiary headings */
+    margin-bottom: 0.5em;
+}
+
+/* Links */
+a {
+    color: #007bff;
+    text-decoration: none;
+    transition: color 0.2s ease-in-out;
+}
+a:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+/* Buttons - General styling for submit buttons and styled links */
+.button-link-custom, input[type="submit"], button {
+    display: inline-block;
+    padding: 10px 18px;
+    font-size: 1em;
+    font-weight: 500;
+    color: white;
+    background-color: #007bff; /* Default primary button color */
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.button-link-custom:hover, input[type="submit"]:hover, button:hover {
+    background-color: #0056b3; /* Darker on hover */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+}
+
+/* Specific button colors */
+.button-link-custom.success, input[type="submit"].success, button.success { background-color: #28a745; } /* Green */
+.button-link-custom.success:hover, input[type="submit"].success:hover, button.success:hover { background-color: #1e7e34; }
+
+.button-link-custom.info, input[type="submit"].info, button.info { background-color: #17a2b8; } /* Teal */
+.button-link-custom.info:hover, input[type="submit"].info:hover, button.info:hover { background-color: #117a8b; }
+
+.button-link-custom.warning, input[type="submit"].warning, button.warning { background-color: #ffc107; color: #212529; } /* Yellow */
+.button-link-custom.warning:hover, input[type="submit"].warning:hover, button.warning:hover { background-color: #e0a800; }
+
+.button-link-custom.danger, input[type="submit"].danger, button.danger { background-color: #dc3545; } /* Red */
+.button-link-custom.danger:hover, input[type="submit"].danger:hover, button.danger:hover { background-color: #bd2130; }
+
+/* Forms Styling */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: .5rem;
+    font-weight: 500;
+    color: #495057;
+}
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="password"],
+.form-group input[type="datetime-local"],
+.form-group textarea,
+.form-group select {
+    width: 100%; /* Full width by default */
+    max-width: 500px; /* Max width for very wide containers */
+    padding: .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.form-group input[type="text"]:focus,
+.form-group input[type="email"]:focus,
+.form-group input[type="password"]:focus,
+.form-group input[type="datetime-local"]:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 .2rem rgba(0,123,255,.25);
+}
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+/* Message Boxes (for success/error messages) */
+.message {
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    text-align: center;
+}
+.message.success {
+    color: #0f5132;
+    background-color: #d1e7dd;
+    border-color: #badbcc;
+}
+.message.error {
+    color: #842029;
+    background-color: #f8d7da;
+    border-color: #f5c2c7;
+}
+
+/* Content Sections on Dashboard */
+.dashboard-section {
+    border: 1px solid #dee2e6; /* Lighter border */
+    margin: 15px 0; /* Consistent margin */
+    padding: 15px;
+    background-color: #fff;
+    border-radius: .25rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+.dashboard-section h3 {
+    margin-top: 0;
+    color: #007bff;
+}
+.dashboard-section .action-area {
+    background-color: #f8f9fa; /* Very light gray for action areas within sections */
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: .25rem;
+    text-align: center;
+}
+
+/* Navbar Customization (if needed beyond navbar.jspf) */
+/* .navbar-custom a { font-weight: 500; } */
+
+/* Footer Placeholder (if you add one) */
+/*
+.footer {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #333;
+    color: white;
+    font-size: 0.9em;
+}
+*/

@@ -1,0 +1,69 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<style>
+    .navbar-custom {
+        background-color: #333; /* Dark background */
+        overflow: hidden;
+        padding: 10px 20px;
+        color: white;
+        border-bottom: 2px solid #007bff; /* Accent color */
+    }
+    .navbar-custom a {
+        float: left;
+        color: #f2f2f2; /* Light text color */
+        text-align: center;
+        padding: 14px 16px;
+        text-decoration: none;
+        font-size: 17px;
+        transition: background-color 0.3s, color 0.3s;
+    }
+    .navbar-custom a:hover {
+        background-color: #007bff; /* Link hover background */
+        color: white; /* Link hover text */
+    }
+    .navbar-custom .nav-title-custom {
+        float: left;
+        padding: 14px 0;
+        font-size: 20px;
+        font-weight: bold;
+        margin-right: 20px;
+        color: #fff; /* Title color */
+    }
+    .navbar-custom .nav-user-info {
+        float: right;
+        padding: 14px 0;
+        font-size: 16px;
+        color: #e0e0e0; /* User info text color */
+    }
+    .navbar-custom .nav-user-info a.logout-link-custom {
+        background-color: #dc3545; /* Logout button color */
+        color: white;
+        border-radius: 4px;
+        padding: 8px 12px;
+        margin-left: 15px;
+        font-size: 16px;
+    }
+    .navbar-custom .nav-user-info a.logout-link-custom:hover {
+        background-color: #c82333; /* Darker logout button on hover */
+    }
+</style>
+
+<div class="navbar-custom">
+    <span class="nav-title-custom">LearnHub</span>
+    <a href="${pageContext.request.contextPath}/dashboard.jsp">Dashboard</a>
+    <a href="${pageContext.request.contextPath}/dsa/today">DSA Problems</a>
+    <a href="${pageContext.request.contextPath}/posts/list">Educational Posts</a>
+    <a href="${pageContext.request.contextPath}/polls">Polls</a>
+    <a href="${pageContext.request.contextPath}/events">Events</a>
+
+    <div class="nav-user-info">
+        <c:if test="${not empty sessionScope.loggedInUser}">
+            Welcome, ${sessionScope.loggedInUser}!
+        </c:if>
+        <c:if test="${empty sessionScope.loggedInUser}">
+            Welcome, Guest!
+        </c:if>
+        <a href="${pageContext.request.contextPath}/logout" class="logout-link-custom">Logout</a>
+    </div>
+</div>

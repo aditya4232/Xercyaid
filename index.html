@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeGram - LeetCode meets Instagram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+        :root {
+            --primary: #6366f1;
+            --secondary: #8b5cf6;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --success: #10b981;
+            --danger: #ef4444;
+        }
+
+        * {
+            font-family: 'Inter', sans-serif;
+            transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: #f8fafc;
+            color: #1e293b;
+        }
+
+        .story-ring {
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+        }
+
+        .post-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .code-editor {
+            background-color: #1e293b;
+            color: #f8fafc;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .tab-active {
+            border-bottom: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .modal {
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .story-viewer {
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { transform: translateX(100%); }
+            to { transform: translateX(0); }
+        }
+
+        .channel-message {
+            animation: messageIn 0.2s ease;
+        }
+
+        @keyframes messageIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .like-animation {
+            animation: like 0.5s ease;
+        }
+
+        @keyframes like {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.3); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+    <!-- Navigation -->
+    <nav class="fixed bottom-0 md:bottom-auto md:top-0 w-full bg-white shadow-sm z-50">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="text-xl font-bold text-indigo-600">CodeGram</h1>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-button" class="text-gray-500 hover:text-gray-900">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Desktop menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="text-gray-900 hover:text-indigo-600">
+                        <i class="fas fa-home text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                        <i class="fas fa-search text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                        <i class="fas fa-plus-square text-xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-indigo-600">
+                        <i class="fas fa-heart text-xl"></i>
+                    </a>
+                    <div class="relative">
+                        <img id="profile-menu-button" src="https://randomuser.me/api/portraits/women/44.jpg" alt="Profile" class="w-8 h-8 rounded-full cursor-pointer">
+                        <!-- Profile dropdown -->
+                        <div id="profile-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-50">
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Profile</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Saved</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Settings</a>
+                            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Log out</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 flex justify-around">
+                <a href="#" class="text-gray-900 hover:text-indigo-600 block px-3 py-2">
+                    <i class="fas fa-home text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-indigo-600 block px-3 py-2">
+                    <i class="fas fa-search text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-indigo-600 block px-3 py-2">
+                    <i class="fas fa-plus-square text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-indigo-600 block px-3 py-2">
+                    <i class="fas fa-heart text-xl"></i>
+                </a>
+                <a href="#" class="text-gray-500 hover:text-indigo-600 block px-3 py-2">
+                    <i class="fas fa-user text-xl"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="bg-gradient-to-br from-primary via-secondary to-instagram text-white">
+        <div class="max-w-5xl mx-auto px-4 py-16">
+            <div class="text-center">
+                <div class="flex justify-center items-center mb-6">
+                    <i class="fab fa-instagram text-6xl mr-4"></i>
+                    <i class="fas fa-plus text-3xl mx-4"></i>
+                    <i class="fas fa-code text-6xl ml-4"></i>
+                </div>
+                <h2 class="text-5xl font-bold mb-6">Welcome to Codegram</h2>
+                <p class="text-xl mb-8 max-w-3xl mx-auto">The social platform where developers share code, solve challenges, and build their programming portfolio. Think Instagram, but for your coding journey.</p>
+                <div class="flex justify-center space-x-4">
+                    <a href="register.html" class="bg-white text-primary px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300 shadow-lg">Start Coding</a>
+                    <a href="#features" class="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-primary transition duration-300">Explore</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div id="features" class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h3 class="text-4xl font-bold text-gray-800 mb-4">Code. Share. Compete.</h3>
+                <p class="text-gray-600 max-w-3xl mx-auto text-lg">Experience the perfect blend of social media and competitive programming. Share your solutions, follow top coders, and climb the leaderboards.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Social Coding Feed -->
+                <div class="bg-gradient-to-br from-purple-50 to-pink-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 border border-purple-100">
+                    <div class="w-16 h-16 bg-gradient-to-r from-primary to-instagram rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-heart text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-4 text-gray-800">Social Code Feed</h4>
+                    <p class="text-gray-600">Share your solutions, like and comment on others' code. Follow your favorite programmers and discover new approaches to problems.</p>
+                    <div class="mt-4 flex items-center text-sm text-gray-500">
+                        <i class="fas fa-users mr-2"></i>
+                        <span>10K+ Active Coders</span>
+                    </div>
+                </div>
+
+                <!-- LeetCode Style Challenges -->
+                <div class="bg-gradient-to-br from-blue-50 to-indigo-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 border border-blue-100">
+                    <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-indigo-600 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-code text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-4 text-gray-800">Coding Challenges</h4>
+                    <p class="text-gray-600">Solve problems ranging from easy to hard. Track your progress, earn badges, and compete in weekly contests just like LeetCode.</p>
+                    <div class="mt-4 flex items-center text-sm text-gray-500">
+                        <i class="fas fa-trophy mr-2"></i>
+                        <span>500+ Problems</span>
+                    </div>
+                </div>
+
+                <!-- Leaderboards & Rankings -->
+                <div class="bg-gradient-to-br from-yellow-50 to-orange-50 p-8 rounded-2xl shadow-lg hover:shadow-xl transition duration-300 border border-yellow-100">
+                    <div class="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center mb-6">
+                        <i class="fas fa-crown text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-4 text-gray-800">Global Rankings</h4>
+                    <p class="text-gray-600">Compete globally, track your ranking, and showcase your achievements. Build your coding reputation and get noticed by recruiters.</p>
+                    <div class="mt-4 flex items-center text-sm text-gray-500">
+                        <i class="fas fa-chart-line mr-2"></i>
+                        <span>Real-time Rankings</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram-style Preview -->
+            <div class="mt-16 bg-gray-50 rounded-3xl p-8">
+                <h4 class="text-2xl font-bold text-center mb-8 text-gray-800">Experience the Feed</h4>
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div class="space-y-4">
+                        <div class="bg-white rounded-2xl p-6 shadow-md">
+                            <div class="flex items-center mb-4">
+                                <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center text-white font-bold">JS</div>
+                                <div class="ml-3">
+                                    <p class="font-semibold">john_codes</p>
+                                    <p class="text-sm text-gray-500">2 hours ago</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-700 mb-3">Just solved "Two Sum" in O(n) time! 🚀</p>
+                            <div class="bg-gray-900 text-green-400 p-3 rounded-lg text-sm font-mono">
+                                def twoSum(nums, target):<br>
+                                &nbsp;&nbsp;seen = {}<br>
+                                &nbsp;&nbsp;for i, num in enumerate(nums):
+                            </div>
+                            <div class="flex items-center mt-4 space-x-4">
+                                <i class="far fa-heart text-gray-500 hover:text-red-500 cursor-pointer"></i>
+                                <i class="far fa-comment text-gray-500 hover:text-blue-500 cursor-pointer"></i>
+                                <i class="far fa-share text-gray-500 hover:text-green-500 cursor-pointer"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h5 class="text-xl font-semibold mb-4">Join the Community</h5>
+                        <p class="text-gray-600 mb-6">Share your coding journey, get feedback, and learn from the best developers worldwide.</p>
+                        <a href="register.html" class="bg-gradient-to-r from-primary to-instagram text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition duration-300">Start Sharing Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="text-center">
+                <div class="flex justify-center items-center mb-4">
+                    <i class="fab fa-instagram text-3xl text-primary mr-3"></i>
+                    <h4 class="text-3xl font-bold bg-gradient-to-r from-primary to-instagram bg-clip-text text-transparent">Codegram</h4>
+                </div>
+                <p class="text-gray-400 mb-6 max-w-2xl mx-auto">Where coding meets social media. Share your solutions, learn from others, and build your programming reputation.</p>
+                <div class="flex justify-center space-x-8 mb-8">
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300 flex items-center">
+                        <i class="fas fa-info-circle mr-2"></i>About
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300 flex items-center">
+                        <i class="fas fa-code mr-2"></i>API
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300 flex items-center">
+                        <i class="fas fa-shield-alt mr-2"></i>Privacy
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition duration-300 flex items-center">
+                        <i class="fas fa-file-contract mr-2"></i>Terms
+                    </a>
+                </div>
+                <div class="flex justify-center space-x-6">
+                    <i class="fab fa-github text-2xl text-gray-400 hover:text-white cursor-pointer transition duration-300"></i>
+                    <i class="fab fa-twitter text-2xl text-gray-400 hover:text-blue-400 cursor-pointer transition duration-300"></i>
+                    <i class="fab fa-discord text-2xl text-gray-400 hover:text-purple-400 cursor-pointer transition duration-300"></i>
+                    <i class="fab fa-linkedin text-2xl text-gray-400 hover:text-blue-600 cursor-pointer transition duration-300"></i>
+                </div>
+                <p class="text-gray-500 text-sm mt-8">© 2024 Codegram. Made with ❤️ for developers worldwide.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

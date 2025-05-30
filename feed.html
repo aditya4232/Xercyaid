@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - Codegram</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8b5cf6',
+                        secondary: '#7c3aed',
+                        accent: '#f59e0b',
+                        instagram: '#E4405F',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Instagram-style Navigation -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4">
+            <div class="flex justify-between items-center py-3">
+                <div class="flex items-center space-x-4">
+                    <i class="fab fa-instagram text-3xl text-primary"></i>
+                    <h1 class="text-2xl font-bold bg-gradient-to-r from-primary to-instagram bg-clip-text text-transparent">Codegram</h1>
+                </div>
+
+                <!-- Search Bar -->
+                <div class="hidden md:flex items-center bg-gray-100 rounded-lg px-4 py-2 w-64">
+                    <i class="fas fa-search text-gray-400 mr-2"></i>
+                    <input type="text" placeholder="Search problems, users..." class="bg-transparent outline-none w-full text-sm">
+                </div>
+
+                <!-- Navigation Icons -->
+                <div class="flex items-center space-x-6">
+                    <i class="fas fa-home text-xl text-primary cursor-pointer"></i>
+                    <a href="problems.html"><i class="fas fa-code text-xl text-gray-600 hover:text-primary cursor-pointer"></i></a>
+                    <i class="fas fa-trophy text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+                    <i class="far fa-heart text-xl text-gray-600 hover:text-primary cursor-pointer"></i>
+                    <div class="w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm cursor-pointer">
+                        <span id="user-avatar">U</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-4xl mx-auto px-4 py-6">
+        <div class="grid lg:grid-cols-3 gap-6">
+            <!-- Main Feed -->
+            <div class="lg:col-span-2 space-y-6">
+                <!-- Stories Section -->
+                <div class="bg-white rounded-xl border border-gray-200 p-4">
+                    <div class="flex space-x-4 overflow-x-auto pb-2">
+                        <div class="flex-shrink-0 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-primary to-instagram rounded-full p-0.5">
+                                <div class="w-full h-full bg-white rounded-full flex items-center justify-center">
+                                    <i class="fas fa-plus text-gray-400"></i>
+                                </div>
+                            </div>
+                            <p class="text-xs mt-1">Your story</p>
+                        </div>
+                        <div class="flex-shrink-0 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full p-0.5">
+                                <div class="w-full h-full bg-white rounded-full flex items-center justify-center font-bold text-sm">JS</div>
+                            </div>
+                            <p class="text-xs mt-1">john_dev</p>
+                        </div>
+                        <div class="flex-shrink-0 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-blue-500 rounded-full p-0.5">
+                                <div class="w-full h-full bg-white rounded-full flex items-center justify-center font-bold text-sm">AL</div>
+                            </div>
+                            <p class="text-xs mt-1">alice_py</p>
+                        </div>
+                        <div class="flex-shrink-0 text-center">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full p-0.5">
+                                <div class="w-full h-full bg-white rounded-full flex items-center justify-center font-bold text-sm">MK</div>
+                            </div>
+                            <p class="text-xs mt-1">mike_cpp</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Post 1 -->
+                <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                    <!-- Post Header -->
+                    <div class="flex items-center justify-between p-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white font-bold">
+                                JS
+                            </div>
+                            <div class="ml-3">
+                                <p class="font-semibold">john_codes</p>
+                                <p class="text-sm text-gray-500">2 hours ago • <span class="text-green-600">Easy</span></p>
+                            </div>
+                        </div>
+                        <i class="fas fa-ellipsis-h text-gray-400 cursor-pointer"></i>
+                    </div>
+
+                    <!-- Post Content -->
+                    <div class="px-4 pb-3">
+                        <p class="text-gray-800 mb-3">Just solved "Two Sum" in O(n) time! 🚀 The key insight is using a hash map to store complements.</p>
+                        <div class="bg-gray-900 rounded-lg p-4 text-sm font-mono overflow-x-auto">
+                            <div class="text-gray-400 mb-2">// Problem: Two Sum - LeetCode #1</div>
+                            <div class="text-green-400">def</div> <div class="text-blue-400">twoSum</div><div class="text-white">(nums, target):</div><br>
+                            <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;seen = {}</div><br>
+                            <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="text-purple-400">for</div> <div class="text-white">i, num </div><div class="text-purple-400">in</div> <div class="text-blue-400">enumerate</div><div class="text-white">(nums):</div><br>
+                            <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;complement = target - num</div><br>
+                            <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="text-purple-400">if</div> <div class="text-white">complement </div><div class="text-purple-400">in</div> <div class="text-white">seen:</div><br>
+                            <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</div><div class="text-purple-400">return</div> <div class="text-white">[seen[complement], i]</div><br>
+                            <div class="text-white">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;seen[num] = i</div>
+                        </div>
+                        <div class="flex items-center mt-3 space-x-4 text-sm text-gray-600">
+                            <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded-full">#python</span>
+                            <span class="bg-green-100 text-green-800 px-2 py-1 rounded-full">#arrays</span>
+                            <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded-full">#hashmap</span>
+                        </div>
+                    </div>
+
+                    <!-- Post Actions -->
+                    <div class="px-4 py-3 border-t border-gray-100">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center space-x-4">
+                                <i class="far fa-heart text-xl text-gray-600 hover:text-red-500 cursor-pointer transition duration-200"></i>
+                                <i class="far fa-comment text-xl text-gray-600 hover:text-blue-500 cursor-pointer transition duration-200"></i>
+                                <i class="far fa-share text-xl text-gray-600 hover:text-green-500 cursor-pointer transition duration-200"></i>
+                            </div>
+                            <i class="far fa-bookmark text-xl text-gray-600 hover:text-yellow-500 cursor-pointer transition duration-200"></i>
+                        </div>
+                        <div class="mt-2">
+                            <p class="font-semibold text-sm">142 likes</p>
+                            <p class="text-sm text-gray-600 mt-1">
+                                <span class="font-semibold">alice_py</span> Great solution! I used a similar approach 👍
+                            </p>
+                            <p class="text-sm text-gray-500 mt-1 cursor-pointer">View all 8 comments</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Challenge Post -->
+                <div class="bg-gradient-to-r from-primary to-secondary rounded-xl text-white p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-white bg-opacity-20 rounded-full flex items-center justify-center">
+                            <i class="fas fa-calendar-day text-xl"></i>
+                        </div>
+                        <div class="ml-4">
+                            <h3 class="font-bold text-lg">Daily Challenge</h3>
+                            <p class="text-purple-100">March 15, 2024</p>
+                        </div>
+                    </div>
+                    <h4 class="text-xl font-semibold mb-2">Valid Parentheses</h4>
+                    <p class="text-purple-100 mb-4">Given a string containing just the characters '(', ')', '{', '}', '[' and ']', determine if the input string is valid.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4">
+                            <span class="bg-white bg-opacity-20 px-3 py-1 rounded-full text-sm">Medium</span>
+                            <span class="text-purple-100">🏆 50 points</span>
+                        </div>
+                        <button class="bg-white text-primary px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition duration-300">
+                            Solve Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-6">
+                <!-- Profile Card -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <div class="text-center">
+                        <div class="w-20 h-20 bg-primary rounded-full flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4">
+                            <span id="profile-avatar">U</span>
+                        </div>
+                        <h3 class="font-bold text-lg" id="profile-username">username</h3>
+                        <p class="text-gray-600 text-sm mb-4">Aspiring Developer</p>
+                        <div class="grid grid-cols-3 gap-4 text-center">
+                            <div>
+                                <p class="font-bold text-lg">23</p>
+                                <p class="text-gray-600 text-xs">Problems</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-lg">156</p>
+                                <p class="text-gray-600 text-xs">Following</p>
+                            </div>
+                            <div>
+                                <p class="font-bold text-lg">89</p>
+                                <p class="text-gray-600 text-xs">Followers</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Leaderboard -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h3 class="font-bold text-lg mb-4 flex items-center">
+                        <i class="fas fa-trophy text-yellow-500 mr-2"></i>
+                        Weekly Leaderboard
+                    </h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="w-6 h-6 bg-yellow-500 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3">1</span>
+                                <div>
+                                    <p class="font-semibold text-sm">alex_master</p>
+                                    <p class="text-gray-500 text-xs">2,450 pts</p>
+                                </div>
+                            </div>
+                            <i class="fas fa-crown text-yellow-500"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="w-6 h-6 bg-gray-400 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3">2</span>
+                                <div>
+                                    <p class="font-semibold text-sm">sarah_dev</p>
+                                    <p class="text-gray-500 text-xs">2,180 pts</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <span class="w-6 h-6 bg-orange-500 text-white rounded-full flex items-center justify-center text-xs font-bold mr-3">3</span>
+                                <div>
+                                    <p class="font-semibold text-sm">mike_cpp</p>
+                                    <p class="text-gray-500 text-xs">1,950 pts</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="w-full mt-4 text-primary text-sm font-semibold hover:underline">View Full Leaderboard</button>
+                </div>
+
+                <!-- Suggested Users -->
+                <div class="bg-white rounded-xl border border-gray-200 p-6">
+                    <h3 class="font-bold text-lg mb-4">Suggested for You</h3>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gradient-to-r from-green-400 to-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    AL
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-semibold text-sm">alice_python</p>
+                                    <p class="text-gray-500 text-xs">Python Expert</p>
+                                </div>
+                            </div>
+                            <button class="text-primary text-sm font-semibold hover:underline">Follow</button>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-gradient-to-r from-purple-400 to-pink-500 rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                    RJ
+                                </div>
+                                <div class="ml-3">
+                                    <p class="font-semibold text-sm">react_ninja</p>
+                                    <p class="text-gray-500 text-xs">Frontend Dev</p>
+                                </div>
+                            </div>
+                            <button class="text-primary text-sm font-semibold hover:underline">Follow</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const username = localStorage.getItem('username');
+
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            if (username) {
+                document.getElementById('profile-username').textContent = username;
+                document.getElementById('user-avatar').textContent = username.charAt(0).toUpperCase();
+                document.getElementById('profile-avatar').textContent = username.charAt(0).toUpperCase();
+            }
+        });
+
+        // Add interactive functionality
+        document.querySelectorAll('.fa-heart').forEach(heart => {
+            heart.addEventListener('click', function() {
+                this.classList.toggle('fas');
+                this.classList.toggle('far');
+                this.classList.toggle('text-red-500');
+            });
+        });
+    </script>
+</body>
+</html>

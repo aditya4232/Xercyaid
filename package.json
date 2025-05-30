@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "xercyaid-learning-platform",
   "version": "1.0.0",
   "description": "A simple HTML learning platform with Tailwind CSS",
@@ -20,5 +21,30 @@
   "devDependencies": {
     "http-server": "^14.1.1",
     "live-server": "^1.2.2"
+=======
+  "name": "app",
+  "version": "1.0.0",
+  "description": "instagram clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./src/main/webapp/css/input.css -o ./src/main/webapp/css/style.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aditya4232/Xercyaid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/aditya4232/Xercyaid/issues"
+  },
+  "homepage": "https://github.com/aditya4232/Xercyaid#readme",
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.1.7"
+>>>>>>> refs/remotes/origin/main
   }
 }

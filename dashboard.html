@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Xercyaid</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#1e40af',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center">
+                    <h1 class="text-2xl font-bold text-primary">Xercyaid</h1>
+                    <span class="ml-2 text-gray-600">Dashboard</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-gray-700">Welcome, <span id="username-display">User</span>!</span>
+                    <button onclick="handleLogout()" class="bg-red-500 text-white px-4 py-2 rounded-lg hover:bg-red-600 transition duration-300">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <!-- Today's Challenge -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4">Today's Coding Challenge</h2>
+            <div class="bg-gray-50 rounded-lg p-6">
+                <h3 class="text-xl font-semibold text-primary mb-3">FizzBuzz Challenge</h3>
+                <p class="text-gray-700 mb-4">
+                    Write a program that prints numbers from 1 to 100. For multiples of three, print "Fizz" instead of the number,
+                    and for the multiples of five, print "Buzz". For numbers which are multiples of both three and five, print "FizzBuzz".
+                </p>
+                <textarea
+                    id="code-solution"
+                    class="w-full h-32 p-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent font-mono text-sm"
+                    placeholder="Write your solution here..."
+                ></textarea>
+                <div class="mt-4 flex space-x-4">
+                    <button
+                        onclick="submitSolution()"
+                        class="bg-primary text-white px-6 py-2 rounded-lg hover:bg-secondary transition duration-300"
+                    >
+                        Submit Solution
+                    </button>
+                    <button
+                        onclick="runCode()"
+                        class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+                    >
+                        Test Code
+                    </button>
+                </div>
+                <div id="code-output" class="mt-4 p-4 bg-gray-800 text-green-400 rounded-lg font-mono text-sm hidden"></div>
+            </div>
+        </div>
+
+        <!-- Grid Layout for Sections -->
+        <div class="grid lg:grid-cols-2 gap-8">
+            <!-- Educational Posts -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Latest Educational Posts</h2>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition duration-300">
+                        <h3 class="text-lg font-semibold text-primary mb-2">Understanding Big O Notation</h3>
+                        <p class="text-gray-600 text-sm mb-3">A comprehensive guide to understanding algorithm efficiency and time complexity analysis.</p>
+                        <a href="#" class="text-primary hover:text-secondary font-medium text-sm">Read more →</a>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition duration-300">
+                        <h3 class="text-lg font-semibold text-primary mb-2">Introduction to Cloud Functions</h3>
+                        <p class="text-gray-600 text-sm mb-3">Learn how serverless functions can simplify your backend development process.</p>
+                        <a href="#" class="text-primary hover:text-secondary font-medium text-sm">Watch video →</a>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 hover:bg-gray-100 transition duration-300">
+                        <h3 class="text-lg font-semibold text-primary mb-2">Data Structures Deep Dive</h3>
+                        <p class="text-gray-600 text-sm mb-3">Explore arrays, linked lists, trees, and graphs with practical examples.</p>
+                        <a href="#" class="text-primary hover:text-secondary font-medium text-sm">Start learning →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upcoming Events -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Upcoming Events & Quizzes</h2>
+                <div class="space-y-4">
+                    <div class="bg-blue-50 border-l-4 border-primary rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Java Basics Quiz</h3>
+                                <p class="text-sm text-gray-600">March 15th, 2:00 PM UTC</p>
+                            </div>
+                            <button class="bg-primary text-white px-4 py-2 rounded-lg text-sm hover:bg-secondary transition duration-300">
+                                Join
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-green-50 border-l-4 border-green-500 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">DSA Study Group</h3>
+                                <p class="text-sm text-gray-600">March 18th, 4:00 PM UTC</p>
+                            </div>
+                            <button class="bg-green-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-600 transition duration-300">
+                                RSVP
+                            </button>
+                        </div>
+                    </div>
+                    <div class="bg-purple-50 border-l-4 border-purple-500 rounded-lg p-4">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <h3 class="font-semibold text-gray-800">Web Dev Workshop</h3>
+                                <p class="text-sm text-gray-600">March 22nd, 6:00 PM UTC</p>
+                            </div>
+                            <button class="bg-purple-500 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-600 transition duration-300">
+                                Register
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Interactive Sections -->
+        <div class="grid lg:grid-cols-2 gap-8 mt-8">
+            <!-- Create Poll -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Create a Poll</h2>
+                <div class="space-y-4">
+                    <input
+                        type="text"
+                        id="poll-question"
+                        placeholder="What's your poll question?"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    >
+                    <button
+                        onclick="createPoll()"
+                        class="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600 transition duration-300"
+                    >
+                        Create Poll
+                    </button>
+                </div>
+            </div>
+
+            <!-- Create Event -->
+            <div class="bg-white rounded-xl shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-gray-800 mb-4">Create an Event</h2>
+                <div class="space-y-4">
+                    <input
+                        type="text"
+                        id="event-title"
+                        placeholder="Event title"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    >
+                    <input
+                        type="datetime-local"
+                        id="event-date"
+                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                    >
+                    <button
+                        onclick="createEvent()"
+                        class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition duration-300"
+                    >
+                        Create Event
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in and redirect to feed
+        document.addEventListener('DOMContentLoaded', function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+            if (!isLoggedIn) {
+                window.location.href = 'login.html';
+                return;
+            }
+
+            // Redirect to the new Instagram-style feed
+            window.location.href = 'feed.html';
+        });
+
+        function handleLogout() {
+            localStorage.removeItem('isLoggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('email');
+            window.location.href = 'index.html';
+        }
+
+        function submitSolution() {
+            const solution = document.getElementById('code-solution').value;
+            if (solution.trim()) {
+                alert('Solution submitted successfully! 🎉');
+            } else {
+                alert('Please write a solution first.');
+            }
+        }
+
+        function runCode() {
+            const code = document.getElementById('code-solution').value;
+            const output = document.getElementById('code-output');
+
+            if (code.trim()) {
+                output.textContent = 'Code executed successfully!\nOutput: 1, 2, Fizz, 4, Buzz, Fizz, 7, 8, Fizz, Buzz...';
+                output.classList.remove('hidden');
+            } else {
+                alert('Please write some code first.');
+            }
+        }
+
+        function createPoll() {
+            const question = document.getElementById('poll-question').value;
+            if (question.trim()) {
+                alert(`Poll created: "${question}"`);
+                document.getElementById('poll-question').value = '';
+            } else {
+                alert('Please enter a poll question.');
+            }
+        }
+
+        function createEvent() {
+            const title = document.getElementById('event-title').value;
+            const date = document.getElementById('event-date').value;
+
+            if (title.trim() && date) {
+                alert(`Event created: "${title}" on ${new Date(date).toLocaleString()}`);
+                document.getElementById('event-title').value = '';
+                document.getElementById('event-date').value = '';
+            } else {
+                alert('Please fill in all event details.');
+            }
+        }
+    </script>
+</body>
+</html>

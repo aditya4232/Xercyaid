@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - LearnHub Firebase</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+        <h1 class="text-3xl font-bold text-center text-blue-600 mb-8">LearnHub Firebase</h1>
+        
+        <!-- Login Form -->
+        <form id="loginForm" class="space-y-6">
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+                <input type="email" id="email" name="email" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                       placeholder="you@example.com">
+            </div>
+            
+            <div>
+                <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="password" name="password" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                       placeholder="••••••••">
+            </div>
+            
+            <div id="errorMessage" class="text-red-500 text-sm hidden"></div>
+
+            <div>
+                <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Sign in
+                </button>
+            </div>
+        </form>
+        
+        <div class="mt-6 text-center">
+            <p class="text-sm text-gray-600">
+                Don't have an account? 
+                <button id="showRegister" class="font-medium text-indigo-600 hover:text-indigo-500">
+                    Sign up
+                </button>
+            </p>
+        </div>
+
+        <!-- Registration Form (Hidden by default) -->
+        <form id="registerForm" class="space-y-6 hidden mt-8">
+            <h2 class="text-2xl font-semibold text-center text-gray-700 mb-6">Create Account</h2>
+            <div>
+                <label for="registerEmail" class="block text-sm font-medium text-gray-700">Email address</label>
+                <input type="email" id="registerEmail" name="registerEmail" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                       placeholder="you@example.com">
+            </div>
+            
+            <div>
+                <label for="registerPassword" class="block text-sm font-medium text-gray-700">Password</label>
+                <input type="password" id="registerPassword" name="registerPassword" required
+                       class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                       placeholder="•••••••• (min. 6 characters)">
+            </div>
+
+            <div id="registerErrorMessage" class="text-red-500 text-sm hidden"></div>
+            
+            <div>
+                <button type="submit"
+                        class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+                    Create Account
+                </button>
+            </div>
+            <div class="mt-4 text-center">
+                <p class="text-sm text-gray-600">
+                    Already have an account? 
+                    <button id="showLogin" class="font-medium text-indigo-600 hover:text-indigo-500">
+                        Sign in
+                    </button>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <!-- Firebase SDKs (replace with your actual config and desired SDKs) -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-app-compat.js"></script> -->
+    <!-- <script src="https://www.gstatic.com/firebasejs/9.x.x/firebase-auth-compat.js"></script> -->
+    <!-- <script src="js/firebase-config.js"></script> -->
+    <!-- <script src="js/auth.js"></script> -->
+    <script>
+        // Basic form switching logic
+        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
+        const showRegisterBtn = document.getElementById('showRegister');
+        const showLoginBtn = document.getElementById('showLogin');
+
+        showRegisterBtn.addEventListener('click', () => {
+            loginForm.classList.add('hidden');
+            registerForm.classList.remove('hidden');
+        });
+
+        showLoginBtn.addEventListener('click', () => {
+            registerForm.classList.add('hidden');
+            loginForm.classList.remove('hidden');
+        });
+
+        // Placeholder for form submission logic (to be implemented with Firebase)
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = loginForm.email.value;
+            const password = loginForm.password.value;
+            console.log('Login attempt with:', email, password);
+            // Actual Firebase login logic here
+            // Example: firebase.auth().signInWithEmailAndPassword(email, password)...
+            document.getElementById('errorMessage').textContent = 'Login functionality not yet implemented.';
+            document.getElementById('errorMessage').classList.remove('hidden');
+        });
+
+        registerForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const email = registerForm.registerEmail.value;
+            const password = registerForm.registerPassword.value;
+            console.log('Registration attempt with:', email, password);
+            // Actual Firebase registration logic here
+            // Example: firebase.auth().createUserWithEmailAndPassword(email, password)...
+            document.getElementById('registerErrorMessage').textContent = 'Registration functionality not yet implemented.';
+            document.getElementById('registerErrorMessage').classList.remove('hidden');
+        });
+    </script>
+
+    <!-- Firebase SDK -->
+    <script defer src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/9.6.1/firebase-auth-compat.js"></script>
+    <script defer src="./js/firebase-init.js"></script>
+    <!-- Specific auth logic for login page -->
+    <script defer src="./js/auth_login_page.js"></script>
+</body>
+</html>
