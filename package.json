@@ -1,0 +1,24 @@
+{
+  "name": "xercyaid-learning-platform",
+  "version": "1.0.0",
+  "description": "A simple HTML learning platform with Tailwind CSS",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server -p 8080 -o",
+    "dev": "npx live-server --port=8080 --open=/index.html",
+    "serve": "python -m http.server 8080"
+  },
+  "keywords": [
+    "learning",
+    "education",
+    "coding",
+    "html",
+    "tailwind"
+  ],
+  "author": "Xercyaid Team",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2"
+  }
+}
